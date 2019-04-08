@@ -1,0 +1,23 @@
+{
+	"name": "zooma",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "node server.js",
+		"build": "next build",
+		"next": "next",
+		"now-build": "next build",
+		"start": "NODE_ENV=production node server.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"express": "^4.16.4",
+		"firebase": "^5.9.0",
+		"next": "^8.0.3",
+		"react": "^16.8.4",
+		"react-dom": "^16.8.4"
+	}
+}
