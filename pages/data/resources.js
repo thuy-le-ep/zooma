@@ -52,7 +52,7 @@ class Resources extends Component {
 
 			// Hide modal and show notification
 			window.$('#addNewModal').modal('hide')
-			window.demo.showNotification('top', 'right', 'Thêm thành công resources mới !', 'rose')
+			window.demo.showNotification('top', 'right', 'Thêm thành công resources mới !', 'success')
 		}).catch(err => {
 			window.demo.showNotification('top', 'right', 'Có lỗi xảy ra. Vui lòng thử lại !', 'danger')
 		})
