@@ -53,30 +53,37 @@ const Navbar = ({ activeRoute }) => (
 	</nav>
 )
 
-const Footer = () => (
-	<footer className="footer ct-footer">
-		<div className="container">
-			<p className="copyright pull-right">
-				&copy;
-				{new Date().getFullYear()} {" "}
-				Development by <a href="https://www.facebook.com/titlv">ThuyKaka</a>.
-			</p>
-		</div>
-		<div id="bodyScript">
-		</div>
-	</footer>
-);
-
-
-export default class AuthLayout extends Component {
+class Footer extends Component {
+	constructor(props) {
+		super(props);
+		this.myRef = React.createRef();
+	}
 
 	async componentDidMount() {
-		var { childNodes } = document.getElementById('bodyScript') || []
+		const { childNodes } = this.myRef.current;
 		if (childNodes.length === 0) {
-			await loadExternalScript()
+			await loadExternalScript(this.myRef.current)
 		}
 	}
 
+	render() {
+		return (
+			<footer className="footer ct-footer">
+				<div className="container-fluid">
+					<p className="copyright pull-right">
+						&copy;
+						{new Date().getFullYear()} {" "}
+						Development by <a href="#">ThuyKaka</a>.
+					</p>
+				</div>
+				<div ref={this.myRef}></div>
+			</footer>
+		)
+	}
+}
+
+
+export default class AuthLayout extends Component {
 	render() {
 		const { title, activeRoute, children } = this.props;
 		return (
