@@ -467,3 +467,48 @@ i.fa-sort {
 	font-size: 13px;
 	padding-top: 6px;
 }
+
+.modal.ct-right .modal-dialog {
+	position: fixed;
+	margin: auto;
+	width: 40%;
+	height: 100%;
+	-webkit-transform: translate3d(0%, 0, 0);
+		-ms-transform: translate3d(0%, 0, 0);
+		 -o-transform: translate3d(0%, 0, 0);
+			transform: translate3d(0%, 0, 0);
+}
+
+.modal.ct-right .modal-content {
+	height: 100%;
+	border-radius: 0 !important;
+	overflow-y: auto;
+}
+
+.modal.ct-right.fade .modal-dialog {
+	right: -40%;
+	-webkit-transition: opacity 0.3s linear, right 0.3s ease-out;
+	   -moz-transition: opacity 0.3s linear, right 0.3s ease-out;
+		 -o-transition: opacity 0.3s linear, right 0.3s ease-out;
+			transition: opacity 0.3s linear, right 0.3s ease-out;
+}
+
+.modal.modal.ct-right .modal-footer {
+	position:absolute;
+	/* bottom:0; */
+	right: 0;
+	padding: 24px !important
+}
+
+.modal.ct-right.fade.in .modal-dialog {
+	right: 0;
+}
+
+
+.ct-label {
+	padding-top: 23px !important
+}
+
+.ct-textarea {
+	padding-left: 7px !important
+}
