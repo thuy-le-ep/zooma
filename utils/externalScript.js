@@ -33,8 +33,6 @@ export async function loadExternalScript(element) {
 	await loadScript("/static/js/perfect-scrollbar.jquery.min.js", element)
 	// <!-- Forms Validations Plugin -->
 	await loadScript("/static/js/jquery.validate.min.js", element)
-	// <!-- Select Plugin -->
-	await loadScript("/static/js/jquery.select-bootstrap.js", element)
 	// <!--  Notifications Plugin -->
 	await loadScript("/static/js/bootstrap-notify.js", element)
 	// < !--Material Dashboard javascript methods-- >

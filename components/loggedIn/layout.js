@@ -18,9 +18,6 @@ const Header = ({ title }) => (
 		<link href="../static/css/demo.css" rel="stylesheet" />
 		<link href="../static/css/font-awesome.css" rel="stylesheet" />
 		<link href="../static/css/google-roboto-300-700.css" rel="stylesheet" />
-		<script src='https://www.gstatic.com/firebasejs/5.8.2/firebase-app.js' />
-		<script src='https://www.gstatic.com/firebasejs/5.8.2/firebase-firestore.js' />
-
 	</Head>
 )
 

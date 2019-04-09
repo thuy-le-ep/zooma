@@ -51,9 +51,9 @@ $(document).ready(function () {
 	md.initMinimizeSidebar();
 
 	//    Activate bootstrap-select
-	if ($(".selectpicker").length != 0) {
-		$(".selectpicker").selectpicker();
-	}
+	// if ($(".selectpicker").length != 0) {
+	// 	$(".selectpicker").selectpicker();
+	// }
 
 	//  Activate the tooltips
 	// $('[rel="tooltip"]').tooltip();

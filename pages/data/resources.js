@@ -49,7 +49,6 @@ class Resources extends Component {
 			this.setState({
 				docs: { _for: '', type: '', price: '', projectName: '', numBedroom: '', location: '', date: '', area: '', id: '', ownerName: '', phone: '', comment: '' }
 			})
-
 			// Hide modal and show notification
 			window.$('#addNewModal').modal('hide')
 			window.demo.showNotification('top', 'right', 'Thêm thành công resources mới !', 'success')
@@ -96,42 +95,42 @@ class Resources extends Component {
 														<div className="card-content">
 															<h4 className="card-title">Thêm mới Resources</h4>
 															<div className="row">
-																<label className="col-sm-2 label-on-left ct-label">Loại hình:</label>
+																<label className="col-sm-2 label-on-left">Loại hình:</label>
 																<div className="col-sm-10">
-																	<select
-																		className="selectpicker"
-																		data-style="select-with-transition"
-																		title="--- Chọn loại hình ---"
-																		data-size="7"
-																		name="_for"
-																		value={_for}
-																		onChange={this.handleChange}
-																	>
-																		<option value="Cần bán">Cần bán</option>
-																		<option value="Cần cho thuê">Cần cho thuê</option>
-																		<option value="Cả hai">Cả hai</option>
-																		<option value="Không có nhu cầu">Không có nhu cầu</option>
-																	</select>
+																	<div className="form-group">
+																		<select
+																			className="form-control"
+																			name="_for"
+																			value={_for}
+																			onChange={this.handleChange}
+																		>
+																			<option disabled value=''>Chọn loại hình</option>
+																			<option value="Cần bán">Cần bán</option>
+																			<option value="Cần cho thuê">Cần cho thuê</option>
+																			<option value="Cả hai">Cả hai</option>
+																			<option value="Không có nhu cầu">Không có nhu cầu</option>
+																		</select>
+																	</div>
 																</div>
 															</div>
 
 															<div className="row">
-																<label className="col-sm-2 label-on-left  ct-label">Loại BĐS:</label>
+																<label className="col-sm-2 label-on-left">Loại BĐS:</label>
 																<div className="col-sm-10">
-																	<select
-																		className="selectpicker"
-																		data-style="select-with-transition"
-																		title="--- Chọn loại bđs ---"
-																		data-size="7"
-																		name="type"
-																		value={type}
-																		onChange={this.handleChange}
-																	>
-																		<option value="Nhà">Nhà</option>
-																		<option value="Căn hộ">Căn hộ</option>
-																		<option value="Villa">Villa</option>
-																		<option value="Mặt bằng(Văn Phòng)">Mặt bằng(văn phòng)</option>
-																	</select>
+																	<div className="form-group">
+																		<select
+																			className="form-control"
+																			name="type"
+																			value={type}
+																			onChange={this.handleChange}
+																		>
+																			<option disabled value=''>Chọn loại bất động sản</option>
+																			<option value="Nhà">Nhà</option>
+																			<option value="Căn hộ">Căn hộ</option>
+																			<option value="Villa">Villa</option>
+																			<option value="Mặt bằng(Văn Phòng)">Mặt bằng(văn phòng)</option>
+																		</select>
+																	</div>
 																</div>
 															</div>
 
