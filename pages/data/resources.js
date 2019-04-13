@@ -6,7 +6,8 @@ import Layout from '../../components/loggedIn/layout'
 
 class Resources extends Component {
 	state = {
-		data: null,
+		fullData: null,
+		filterData: null,
 		docs: {
 			_for: '',
 			type: '',
@@ -28,14 +29,14 @@ class Resources extends Component {
 		let data = {}
 		db.collection('resources').onSnapshot(querySnapshot => {
 			querySnapshot.forEach(doc => data[doc.id] = doc.data())
-			if (data) this.setState({ data })
+			if (data) this.setState({ fullData: data, filterData: data })
 		}, error => console.error(error))
 	}
 
 	handleChange = (e) => {
 		let docs = { ...this.state.docs }
 		docs[e.target.name] = e.target.value
-		this.setState({ docs });
+		this.setState({ docs })
 	}
 
 	handleSubmit = (e) => {
@@ -51,14 +52,26 @@ class Resources extends Component {
 			})
 			// Hide modal and show notification
 			window.$('#addNewModal').modal('hide')
-			window.demo.showNotification('top', 'right', 'Thêm thành công resources mới !', 'success')
+			setTimeout(() => { window.demo.showNotification('top', 'right', 'Thêm thành công resources mới !', 'success') }, 1000)
 		}).catch(err => {
 			window.demo.showNotification('top', 'right', 'Có lỗi xảy ra. Vui lòng thử lại !', 'danger')
 		})
 	}
 
+	handleSearchTable = (e) => {
+		let { fullData } = this.state
+		let filterData = {}
+
+		if (e.target.value !== "") {
+			filterData = Object.values(fullData).filter(doc => Object.values(doc).some(field => field.toString().toLowerCase().includes(e.target.value.toLowerCase())))
+		} else {
+			filterData = fullData
+		}
+		this.setState({ filterData })
+	}
+
 	render() {
-		let { data, docs } = this.state
+		let { filterData, docs } = this.state
 		let { _for, type, price, projectName, numBedroom, location, date, area, id, ownerName, phone, comment } = docs
 		let validPhoneRegex = /((09|03|07|08|05)+([0-9]{8})\b)/g
 		let isInvalid = !validPhoneRegex.test(phone) || _for === '' || type === '' || price === '' || projectName === '' || numBedroom === '' || location === '' || date === '' || area === '' || id === '' || ownerName === ''
@@ -258,9 +271,16 @@ class Resources extends Component {
 												</select><span className="material-input"></span></div></label></div>
 											</div>
 											<div className="col-sm-12 col-md-6">
-												<div className="dataTables_filter"><label>Search<div className="form-group is-empty"><input type="search"
-													className="form-control form-control-sm" placeholder="Search" /><span
-														className="material-input"></span></div></label></div>
+												<div className="dataTables_filter">
+													<label>
+														Search
+														<div className="form-group is-empty">
+															<input type="search"
+																className="form-control form-control-sm" placeholder="Search" onChange={this.handleSearchTable} />
+															<span className="material-input"></span>
+														</div>
+													</label>
+												</div>
 											</div>
 										</div>
 										<div className="row">
@@ -284,20 +304,20 @@ class Resources extends Component {
 															</tr>
 														</thead>
 														<tbody>
-															{data && Object.keys(data).map(key => (
+															{filterData && Object.keys(filterData).map(key => (
 																<tr key={key}>
-																	<td>{data[key]._for}</td>
-																	<td>{data[key].type}</td>
-																	<td>{data[key].price}</td>
-																	<td>{data[key].projectName}</td>
-																	<td>{data[key].numBedroom}</td>
-																	<td>{data[key].location}</td>
-																	<td>{data[key].date}</td>
-																	<td>{data[key].area}</td>
-																	<td>{data[key].id}</td>
-																	<td>{data[key].ownerName}</td>
-																	<td>{data[key].phone}</td>
-																	<td>{data[key].comment}</td>
+																	<td>{filterData[key]._for}</td>
+																	<td>{filterData[key].type}</td>
+																	<td>{filterData[key].price}</td>
+																	<td>{filterData[key].projectName}</td>
+																	<td>{filterData[key].numBedroom}</td>
+																	<td>{filterData[key].location}</td>
+																	<td>{filterData[key].date}</td>
+																	<td>{filterData[key].area}</td>
+																	<td>{filterData[key].id}</td>
+																	<td>{filterData[key].ownerName}</td>
+																	<td>{filterData[key].phone}</td>
+																	<td>{filterData[key].comment}</td>
 																</tr>
 															))}
 														</tbody>
@@ -344,7 +364,7 @@ class Resources extends Component {
 						</div>
 					</div>
 				</div>
-			</Layout >
+			</Layout>
 		)
 	}
 }
