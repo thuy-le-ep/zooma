@@ -8,6 +8,7 @@ class Resources extends Component {
 	state = {
 		fullData: null,
 		filterData: null,
+		numRowPerPage: 10,
 		docs: {
 			_for: '',
 			type: '',
@@ -24,12 +25,18 @@ class Resources extends Component {
 		}
 	}
 
+	sliceData = (obj, numRowPerPage) => {
+		let result = {}
+		Object.keys(obj).slice(0, numRowPerPage).forEach(key => result[key] = obj[key])
+		return result
+	}
+
 	componentDidMount() {
 		let db = firebase.firestore()
 		let data = {}
-		db.collection('resources').onSnapshot(querySnapshot => {
+		db.collection('resources').orderBy("_for").onSnapshot(querySnapshot => {
 			querySnapshot.forEach(doc => data[doc.id] = doc.data())
-			if (data) this.setState({ fullData: data, filterData: data })
+			if (data) this.setState({ fullData: data, filterData: this.sliceData(data, this.state.numRowPerPage) })
 		}, error => console.error(error))
 	}
 
@@ -46,13 +53,14 @@ class Resources extends Component {
 
 		// Add data to firestore
 		db.collection('resources').add(docs).then(docRef => {
+			// Hide modal and show notification
+			window.demo.showNotification('top', 'right', 'Thêm thành công resources mới !', 'success')
+			window.$('#addNewModal').modal('hide')
+
 			// Empty docs state
 			this.setState({
 				docs: { _for: '', type: '', price: '', projectName: '', numBedroom: '', location: '', date: '', area: '', id: '', ownerName: '', phone: '', comment: '' }
 			})
-			// Hide modal and show notification
-			window.$('#addNewModal').modal('hide')
-			setTimeout(() => { window.demo.showNotification('top', 'right', 'Thêm thành công resources mới !', 'success') }, 1000)
 		}).catch(err => {
 			window.demo.showNotification('top', 'right', 'Có lỗi xảy ra. Vui lòng thử lại !', 'danger')
 		})
@@ -70,8 +78,16 @@ class Resources extends Component {
 		this.setState({ filterData })
 	}
 
+	handleChangeNumRow = (e) => {
+		let { fullData } = this.state
+		let numRowPerPage = parseInt(e.target.value.toString())
+		let filterData = this.sliceData(fullData, numRowPerPage)
+		this.setState({ numRowPerPage, filterData })
+
+	}
+
 	render() {
-		let { filterData, docs } = this.state
+		let { filterData, fullData, docs, numRowPerPage } = this.state
 		let { _for, type, price, projectName, numBedroom, location, date, area, id, ownerName, phone, comment } = docs
 		let validPhoneRegex = /((09|03|07|08|05)+([0-9]{8})\b)/g
 		let isInvalid = !validPhoneRegex.test(phone) || _for === '' || type === '' || price === '' || projectName === '' || numBedroom === '' || location === '' || date === '' || area === '' || id === '' || ownerName === ''
@@ -96,7 +112,7 @@ class Resources extends Component {
 										<div className="ripple-container"></div>
 									</button>
 								</div>
-								<div className="modal fade ct-right" id="addNewModal" tabIndex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+								<div className="modal fade ct-right" id="addNewModal" tabIndex="-1" role="dialog" aria-hidden="true">
 									<div className="modal-dialog">
 										<div className="modal-content">
 											<div className="modal-body">
@@ -262,13 +278,23 @@ class Resources extends Component {
 									<div className="dataTables_wrapper dt-bootstrap4">
 										<div className="row">
 											<div className="col-sm-12 col-md-6">
-												<div className="dataTables_length bs-select"><label>Show<div className="form-group"><select
-													className="custom-select custom-select-sm form-control form-control-sm">
-													<option value="10">10</option>
-													<option value="20">20</option>
-													<option value="50">50</option>
-													<option value="100">100</option>
-												</select><span className="material-input"></span></div></label></div>
+												<div className="dataTables_length bs-select">
+													<label>Show
+													<div className="form-group">
+															<select
+																className="custom-select custom-select-sm form-control form-control-sm"
+																onChange={this.handleChangeNumRow}
+															>
+																<option value="10">10</option>
+																<option value="25">25</option>
+																<option value="50">50</option>
+																<option value="100">100</option>
+																<option value="999999">All</option>
+															</select>
+															<span className="material-input"></span>
+														</div>
+													</label>
+												</div>
 											</div>
 											<div className="col-sm-12 col-md-6">
 												<div className="dataTables_filter">
@@ -343,7 +369,7 @@ class Resources extends Component {
 										</div>
 										<div className="row">
 											<div className="col-sm-12 col-md-5">
-												<div className="dataTables_info" role="status" aria-live="polite">Showing 1 to 4 of 4 entries</div>
+												<div className="dataTables_info" role="status" aria-live="polite">Showing 1 to {numRowPerPage} of {fullData && Object.entries(fullData).length} entries</div>
 											</div>
 											<div className="col-sm-12 col-md-7">
 												<div className="dataTables_paginate">
