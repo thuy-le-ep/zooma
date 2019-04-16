@@ -504,11 +504,50 @@ i.fa-sort {
 	right: 0;
 }
 
-
 .ct-label {
 	padding-top: 23px !important
 }
 
 .ct-textarea {
 	padding-left: 7px !important
+}
+
+.ct-pointer {
+	cursor: pointer
+}
+
+.pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {
+	pointer-events: none!important;
+	
+}
+
+.ct-active {
+	color: #e91e63 !important
+}
+
+.ct-active.fa-sort-asc{
+	padding-top: 15px
+}
+
+.fa-sort{
+	padding-top: 13px !important
+}
+
+.ct-active.fa-sort-desc {
+	padding-top: 13px
+}
+
+.ct-form-select {
+
+}
+
+.ct-form-inline .form-group {
+    padding-bottom: 0 !important;
+    margin: 0 !important
+}
+
+.ct-form-inline .form-control {
+	padding: 0;
+	font-size: 13px !important;
+	font-weight: 600
 }
