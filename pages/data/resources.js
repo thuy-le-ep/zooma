@@ -40,8 +40,8 @@ class Resources extends Component {
 		let { doc } = this.state
 
 		resourcesRef.add(doc).then(docRef => {
-			window.demo.showNotification('top', 'right', 'Thêm thành công resources mới !', 'success')
 			window.$('#addNewModal').modal('hide')
+			window.demo.showNotification('top', 'right', 'Thêm thành công resources mới !', 'success')
 			this.setState({ doc: NEW_DOC_STRUCTURE })
 		}).catch(err => {
 			window.demo.showNotification('top', 'right', 'Có lỗi xảy ra. Vui lòng thử lại!', 'danger')
@@ -317,67 +317,67 @@ class Resources extends Component {
 														<thead>
 															<tr>
 																<th width="8%" className="form-inline ct-form-inline">
-																	<select value="false" className="form-control ct-form-select">
+																	<select defaultValue="false" className="form-control ct-form-select">
 																		<option disabled value="false">Loại hình</option>
 																	</select>
 																	<i aria-hidden="true" data-field='_for' className={`fa ${sortOn === '_for' ? 'ct-active' : 'fa-sort'} ${sortOn === '_for' && 'fa-sort-' + sortBy} float-right ct-pointer`} onClick={this.handleSortTable}></i>
 																</th>
 																<th width="8%" className="form-inline ct-form-inline">
-																	<select value="false" className="form-control ct-form-select">
+																	<select defaultValue="false" className="form-control ct-form-select">
 																		<option disabled value="false">Loại BĐS</option>
 																	</select>
 																	<i aria-hidden="true" data-field='type' className={`fa ${sortOn === 'type' ? 'ct-active' : 'fa-sort'} ${sortOn === 'type' && 'fa-sort-' + sortBy} float-right ct-pointer`} onClick={this.handleSortTable}></i>
 																</th>
 																<th width="5%" className="form-inline ct-form-inline">
-																	<select value="false" className="form-control ct-form-select">
+																	<select defaultValue="false" className="form-control ct-form-select">
 																		<option disabled value="false">Giá</option>
 																	</select>
 																	<i aria-hidden="true" data-field='price' className={`fa ${sortOn === 'price' ? 'ct-active' : 'fa-sort'} ${sortOn === 'price' && 'fa-sort-' + sortBy} float-right ct-pointer`} onClick={this.handleSortTable}></i>
 																</th>
 																<th width="10%" className="form-inline ct-form-inline">
-																	<select value="false" className="form-control ct-form-select">
+																	<select defaultValue="false" className="form-control ct-form-select">
 																		<option disabled value="false">Tên dự án</option>
 																	</select>
 																	<i aria-hidden="true" data-field='projectName' className={`fa ${sortOn === 'projectName' ? 'ct-active' : 'fa-sort'} ${sortOn === 'projectName' && 'fa-sort-' + sortBy} float-right ct-pointer`} onClick={this.handleSortTable}></i>
 																</th>
 																<th width="8%" className="form-inline ct-form-inline">
-																	<select value="false" className="form-control ct-form-select">
+																	<select defaultValue="false" className="form-control ct-form-select">
 																		<option disabled value="false">Phòng ngủ</option>
 																	</select>
 																	<i aria-hidden="true" data-field='numBedroom' className={`fa ${sortOn === 'numBedroom' ? 'ct-active' : 'fa-sort'} ${sortOn === 'numBedroom' && 'fa-sort-' + sortBy} float-right ct-pointer`} onClick={this.handleSortTable}></i>
 																</th>
 																<th width="10%" className="form-inline ct-form-inline">
-																	<select value="false" className="form-control ct-form-select">
+																	<select defaultValue="false" className="form-control ct-form-select">
 																		<option disabled value="false">Khu vực</option>
 																	</select>
 																	<i aria-hidden="true" data-field='location' className={`fa ${sortOn === 'location' ? 'ct-active' : 'fa-sort'} ${sortOn === 'location' && 'fa-sort-' + sortBy} float-right ct-pointer`} onClick={this.handleSortTable}></i>
 																</th>
 																<th width="10%" className="form-inline ct-form-inline">
-																	<select value="false" className="form-control ct-form-select">
+																	<select defaultValue="false" className="form-control ct-form-select">
 																		<option disabled value="false">Hiệu lực</option>
 																	</select>
 																	<i aria-hidden="true" data-field='date' className={`fa ${sortOn === 'date' ? 'ct-active' : 'fa-sort'} ${sortOn === 'date' && 'fa-sort-' + sortBy} float-right ct-pointer`} onClick={this.handleSortTable}></i>
 																</th>
 																<th width="8%" className="form-inline ct-form-inline">
-																	<select value="false" className="form-control ct-form-select">
+																	<select defaultValue="false" className="form-control ct-form-select">
 																		<option disabled value="false">Diện tích</option>
 																	</select>
 																	<i aria-hidden="true" data-field='area' className={`fa ${sortOn === 'area' ? 'ct-active' : 'fa-sort'} ${sortOn === 'area' && 'fa-sort-' + sortBy} float-right ct-pointer`} onClick={this.handleSortTable}></i>
 																</th>
 																<th width="8%" className="form-inline ct-form-inline">
-																	<select value="false" className="form-control ct-form-select">
+																	<select defaultValue="false" className="form-control ct-form-select">
 																		<option disabled value="false">Mã căn hộ</option>
 																	</select>
 																	<i aria-hidden="true" data-field='id' className={`fa ${sortOn === 'id' ? 'ct-active' : 'fa-sort'} ${sortOn === 'id' && 'fa-sort-' + sortBy} float-right ct-pointer`} onClick={this.handleSortTable}></i>
 																</th>
 																<th width="8%" className="form-inline ct-form-inline">
-																	<select value="false" className="form-control ct-form-select">
+																	<select defaultValue="false" className="form-control ct-form-select">
 																		<option disabled value="false">Chủ căn hộ</option>
 																	</select>
 																	<i aria-hidden="true" data-field='ownerName' className={`fa ${sortOn === 'ownerName' ? 'ct-active' : 'fa-sort'} ${sortOn === 'ownerName' && ('fa-sort-' + sortBy)} float-right ct-pointer`} onClick={this.handleSortTable}></i>
 																</th>
 																<th width="5%" className="form-inline ct-form-inline">
-																	<select value="false" className="form-control ct-form-select">
+																	<select defaultValue="false" className="form-control ct-form-select">
 																		<option disabled value="false">SĐT</option>
 																	</select>
 																	<i aria-hidden="true" data-field='phone' className={`fa ${sortOn === 'phone' ? 'ct-active' : 'fa-sort'} ${sortOn === 'phone' && 'fa-sort-' + sortBy} float-right ct-pointer`} onClick={this.handleSortTable}></i>
